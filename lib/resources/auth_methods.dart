@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:instagram/components/widgets.dart';
 import 'package:instagram/resources/storage_methode.dart';
+import 'package:instagram/screens/login_screen.dart';
 
 class AuthMethods {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -58,32 +59,34 @@ class AuthMethods {
           'photoUrl': photoUrl
         });
 
-        res = "success";
+        res = "successfully registered";
         showSnackBar(res, context);
-      } else {
-        res = "Please enter all the fields";
-        showToast(msg: res, state: ToastState.ERROR);
+        navigateTo(context, LoginScreen());
       }
     } on FirebaseAuthException catch (e) {
       showToast(msg: Errors.show(e.code.toString()), state: ToastState.ERROR);
     } catch (err) {
       showToast(msg: Errors.show(err.toString()), state: ToastState.ERROR);
-      print(err.toString());
-      return err.toString();
     }
     return res;
   }
 
-  Future<String> SignInUser(
+  Future<String> signInUser(
       {required String email, required String password}) async {
     String res = "Some error occurred ";
 
     try {
-      _auth.signInWithEmailAndPassword(email: email, password: password);
+      await _auth.signInWithEmailAndPassword(email: email, password: password);
       res = "Success";
+      showToast(msg: "Login Successfully", state: ToastState.SUCCESS);
+
+    } on FirebaseAuthException catch (e) {
+      print(e.code);
+      showToast(msg: Errors.show(e.code.toString()), state: ToastState.ERROR);
     } catch (err) {
-      res = err.toString();
-      print(res);
+      print("Error");
+      showToast(
+          msg: '${Errors.show(err.toString())} error', state: ToastState.ERROR);
     }
     return res;
   }
@@ -101,9 +104,10 @@ class Errors {
       case 'ERROR_ACCOUNT_EXISTS_WITH_DIFFERENT_CREDENTIAL':
         return "The e-mail address in your Facebook account has been registered in the system before. Please login by trying other methods with this e-mail address.";
 
-      case 'ERROR_WRONG_PASSWORD':
-        return "E-mail address or password is incorrect.";
-
+      case 'user-not-found':
+        return "E-mail address is incorrect.";
+      case 'wrong-password':
+        return "Password  is incorrect.";
       default:
         return "An error has occurred";
     }

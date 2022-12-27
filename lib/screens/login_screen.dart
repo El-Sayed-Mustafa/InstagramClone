@@ -29,15 +29,8 @@ class _LoginScreenState extends State<LoginScreen> {
     setState(() {
       isLoading = true;
     });
-    String res = await AuthMethods().SignInUser(
+    await AuthMethods().signInUser(
         email: _emailController.text, password: _passwordController.text);
-
-    if (res == "success") {
-      print('success');
-    } else {
-      showSnackBar(res, context);
-      print('aaa');
-    }
     setState(() {
       isLoading = false;
     });
@@ -90,29 +83,28 @@ class _LoginScreenState extends State<LoginScreen> {
                     InkWell(
                       onTap: () {
                         if (_formKey.currentState!.validate()) {
-                          print('object');
                           loginUser();
                         }
                       },
-                      child:isLoading
+                      child: isLoading
                           ? const Center(
-                        child: CircularProgressIndicator(),
-                      )
-                          :  Container(
-                        width: double.infinity,
-                        alignment: Alignment.center,
-                        padding: const EdgeInsets.symmetric(vertical: 13),
-                        decoration: const ShapeDecoration(
-                            shape: RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10))),
-                            color: Colors.blue),
-                        child: const Text(
+                              child: CircularProgressIndicator(),
+                            )
+                          : Container(
+                              width: double.infinity,
+                              alignment: Alignment.center,
+                              padding: const EdgeInsets.symmetric(vertical: 13),
+                              decoration: const ShapeDecoration(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10))),
+                                  color: Colors.blue),
+                              child: const Text(
                                 'Login',
                                 style: TextStyle(
                                     fontSize: 20, fontWeight: FontWeight.bold),
                               ),
-                      ),
+                            ),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,

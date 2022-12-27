@@ -44,7 +44,6 @@ Widget defaultFormField({
   required TextEditingController controller,
   required TextInputType type,
   Function? onSubmit,
-  Function? onTap,
   bool isPassword = false,
   required Function validate,
   required String label,
@@ -59,9 +58,7 @@ Widget defaultFormField({
       obscureText: isPassword,
       enabled: isClickable,
       onFieldSubmitted: (value) {},
-      onTap: () {
-        onTap!();
-      },
+
       validator: (value) {
         return validate(value);
       },
