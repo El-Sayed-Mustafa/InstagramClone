@@ -15,7 +15,7 @@ class AuthMethods {
     required String username,
     required String bio,
     required Uint8List file,
-    required  context,
+    required context,
   }) async {
     String res = "Some error Occurred";
     try {
@@ -59,24 +59,40 @@ class AuthMethods {
         });
 
         res = "success";
-        showSnackBar(res,context);
+        showSnackBar(res, context);
       } else {
         res = "Please enter all the fields";
-      showToast(msg:res , state: ToastState.ERROR);
+        showToast(msg: res, state: ToastState.ERROR);
       }
+    } on FirebaseAuthException catch (e) {
+      showToast(msg: Errors.show(e.code.toString()), state: ToastState.ERROR);
     } catch (err) {
-
       showToast(msg: Errors.show(err.toString()), state: ToastState.ERROR);
       print(err.toString());
       return err.toString();
     }
     return res;
   }
+
+  Future<String> SignInUser(
+      {required String email, required String password}) async {
+    String res = "Some error occurred ";
+
+    try {
+      _auth.signInWithEmailAndPassword(email: email, password: password);
+      res = "Success";
+    } catch (err) {
+      res = err.toString();
+      print(res);
+    }
+    return res;
+  }
 }
+
 class Errors {
   static String show(String errorCode) {
     switch (errorCode) {
-      case '[firebase_auth/email-already-in-use] The email address is already in use by another account.':
+      case 'ERROR_EMAIL_ALREADY_IN_USE':
         return "This e-mail address is already in use, please use a different e-mail address.";
 
       case 'ERROR_INVALID_EMAIL':

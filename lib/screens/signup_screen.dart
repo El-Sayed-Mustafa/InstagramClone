@@ -24,6 +24,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _passwordController = TextEditingController();
   Uint8List? _image;
   final _formKey = GlobalKey<FormState>();
+  bool isLoading = false;
 
   @override
   void dispose() {
@@ -145,7 +146,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         }
                         if (_formKey.currentState!.validate() &&
                             _image != null) {
-
+                          setState(() {
+                            isLoading = true;
+                          });
                           await AuthMethods().signUpUser(
                               email: _emailController.text,
                               password: _passwordController.text,
@@ -153,23 +156,30 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               bio: _bioController.text,
                               file: _image!,
                               context: context);
+                          setState(() {
+                            isLoading = false;
+                          });
                         }
                       },
-                      child: Container(
-                        width: double.infinity,
-                        alignment: Alignment.center,
-                        padding: const EdgeInsets.symmetric(vertical: 13),
-                        decoration: const ShapeDecoration(
-                            shape: RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10))),
-                            color: Colors.blue),
-                        child: const Text(
-                          'Register',
-                          style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold),
-                        ),
-                      ),
+                      child: isLoading
+                          ? const Center(
+                              child: CircularProgressIndicator(),
+                            )
+                          : Container(
+                              width: double.infinity,
+                              alignment: Alignment.center,
+                              padding: const EdgeInsets.symmetric(vertical: 13),
+                              decoration: const ShapeDecoration(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10))),
+                                  color: Colors.blue),
+                              child: const Text(
+                                'Register',
+                                style: TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.bold),
+                              ),
+                            ),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
