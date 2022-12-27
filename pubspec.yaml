@@ -43,6 +43,7 @@ dependencies:
   flutter_staggered_grid_view:
   flutter_svg:
   fluttertoast:
+  image_picker:
 
 dev_dependencies:
   flutter_test:

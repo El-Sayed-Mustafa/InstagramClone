@@ -61,6 +61,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       validate: () {},
                       label: 'Password',
                       prefix: Icons.lock_outline),
+
                   const SizedBox(height: 40.0),
                   InkWell(
                     child: Container(
