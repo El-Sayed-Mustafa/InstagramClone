@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram/utils/colors.dart';
+import 'package:instagram/utils/gloabl_variabels.dart';
 import 'package:provider/provider.dart';
 import 'package:instagram/models/user.dart' as model;
 
@@ -47,13 +48,7 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
         controller: pageController,
         physics: const BouncingScrollPhysics(),
         onPageChanged: onPageChange,
-        children: const [
-          Text('Home Screen'),
-          Text('Search Screen'),
-          Text('Add Post Screen'),
-          Text('Notification Screen'),
-          Text('Profile Screen'),
-        ],
+        children: homeScreenItems,
       ),
       bottomNavigationBar: CupertinoTabBar(
         backgroundColor: mobileBackgroundColor,
