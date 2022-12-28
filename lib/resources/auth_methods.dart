@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:instagram/components/widgets.dart';
 import 'package:instagram/resources/storage_methode.dart';
+import 'package:instagram/screens/home_screen.dart';
 import 'package:instagram/screens/login_screen.dart';
 
 class AuthMethods {
@@ -72,14 +73,14 @@ class AuthMethods {
   }
 
   Future<String> signInUser(
-      {required String email, required String password}) async {
+      {required String email, required String password,context}) async {
     String res = "Some error occurred ";
 
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
       res = "Success";
       showToast(msg: "Login Successfully", state: ToastState.SUCCESS);
-
+      navigateAndFinish(context,HomeScreen());
     } on FirebaseAuthException catch (e) {
       print(e.code);
       showToast(msg: Errors.show(e.code.toString()), state: ToastState.ERROR);
