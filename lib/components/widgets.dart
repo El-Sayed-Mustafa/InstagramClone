@@ -106,7 +106,7 @@ Widget defaultButton({
       ),
       child: MaterialButton(
         onPressed: () {
-          function!();
+          function();
         },
         child: Text(
           isUpperCase ? text.toUpperCase() : text,

@@ -103,7 +103,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         controller: _usernameController,
                         type: TextInputType.text,
                         validate: (value) {
-                          if (value == null || value.isEmpty) {
+                          final RegExp regex = RegExp('[a-zA-Z]');
+
+                          if (value == null ||
+                              value.isEmpty ||
+                              !regex.hasMatch(value)) {
                             return 'Please Enter yor name';
                           }
                           return null;
