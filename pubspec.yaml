@@ -44,6 +44,8 @@ dependencies:
   flutter_svg:
   fluttertoast:
   image_picker:
+  provider:
+  conditional_builder_null_safety:
 
 dev_dependencies:
   flutter_test:

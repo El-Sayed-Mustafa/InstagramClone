@@ -3,7 +3,7 @@ import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:instagram/components/widgets.dart';
-import 'package:instagram/models/user.dart'as model;
+import 'package:instagram/models/user.dart' as model;
 import 'package:instagram/resources/storage_methode.dart';
 import 'package:instagram/screens/home_screen.dart';
 import 'package:instagram/screens/login_screen.dart';
@@ -11,6 +11,16 @@ import 'package:instagram/screens/login_screen.dart';
 class AuthMethods {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+
+  Future<model.User> getUserDetails() async {
+    User currentUser = _auth.currentUser!;
+
+    DocumentSnapshot documentSnapshot =
+    await _firestore.collection('users').doc(currentUser.uid).get();
+
+    return  model.User.fromSnap(documentSnapshot);
+  }
 
   Future<String> signUpUser({
     required String email,
@@ -47,7 +57,10 @@ class AuthMethods {
           following: [],
         );
 
-        await _firestore.collection("users").doc(cred.user!.uid).set(_user.toJson());
+        await _firestore
+            .collection("users")
+            .doc(cred.user!.uid)
+            .set(_user.toJson());
 
         res = "successfully registered";
         showSnackBar(res, context);
@@ -62,14 +75,14 @@ class AuthMethods {
   }
 
   Future<String> signInUser(
-      {required String email, required String password,context}) async {
+      {required String email, required String password, context}) async {
     String res = "Some error occurred ";
 
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
       res = "Success";
       showToast(msg: "Login Successfully", state: ToastState.SUCCESS);
-      navigateAndFinish(context,HomeScreen());
+      navigateAndFinish(context, HomeScreen());
     } on FirebaseAuthException catch (e) {
       print(e.code);
       showToast(msg: Errors.show(e.code.toString()), state: ToastState.ERROR);
