@@ -45,6 +45,7 @@ dependencies:
   fluttertoast:
   image_picker:
   provider:
+  uuid:
   conditional_builder_null_safety:
 
 dev_dependencies:

@@ -2,7 +2,9 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:instagram/components/widgets.dart';
 import 'package:instagram/providers/user_provider.dart';
+import 'package:instagram/resources/firestore_methdes.dart';
 import 'package:instagram/utils/colors.dart';
 import 'package:provider/provider.dart';
 
@@ -19,6 +21,28 @@ class AddPostScreen extends StatefulWidget {
 class _AddPostScreenState extends State<AddPostScreen> {
   Uint8List? _file;
   final TextEditingController _descriptionController = TextEditingController();
+  bool isLoading = false;
+
+  void postImage(String uid, String username, String profImage) async {
+    try {
+      setState(() {
+        isLoading = true;
+      });
+      String res = await FirestoreMethods().uploadPost(
+          _descriptionController.text, _file!, username, profImage, uid);
+
+      if (res == "success") {
+        showSnackBar('Posted!', context);
+      } else {
+        showSnackBar(res, context);
+      }
+      setState(() {
+        isLoading = false;
+      });
+    } catch (e) {
+      showSnackBar(e.toString(), context);
+    }
+  }
 
   _selectImage(BuildContext context) async {
     return showDialog(
@@ -72,6 +96,17 @@ class _AddPostScreenState extends State<AddPostScreen> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    _descriptionController.dispose();
+  }
+  void clearImage() {
+    setState(() {
+      _file = null;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     final User? user = Provider.of<UserProvider>(context).getUser;
 
@@ -87,19 +122,21 @@ class _AddPostScreenState extends State<AddPostScreen> {
               backgroundColor: mobileBackgroundColor,
               leading: IconButton(
                 icon: const Icon(Icons.arrow_back),
-                onPressed: () {},
+                onPressed: clearImage,
               ),
               title: const Text('Post to'),
               centerTitle: false,
               actions: [
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () =>
+                      postImage(user!.uid, user.username, user.photoURL),
                   icon: const Icon(Icons.post_add, size: 30),
                 )
               ],
             ),
             body: Column(
               children: [
+                isLoading ? const LinearProgressIndicator() : Container(),
                 Padding(
                   padding: const EdgeInsets.all(30.0),
                   child: Row(
