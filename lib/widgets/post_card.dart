@@ -3,12 +3,17 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:instagram/utils/colors.dart';
+import 'package:intl/intl.dart';
 
 class PostCard extends StatelessWidget {
-  const PostCard({Key? key}) : super(key: key);
+  final snap;
+
+  const PostCard({Key? key, required this.snap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    print(snap['profImage']);
+
     return Container(
       color: mobileBackgroundColor,
       padding: const EdgeInsets.symmetric(vertical: 10),
@@ -19,34 +24,33 @@ class PostCard extends StatelessWidget {
                 .copyWith(right: 0),
             child: Row(
               children: [
-                const CircleAvatar(
+                CircleAvatar(
                   radius: 20,
-                  backgroundImage: NetworkImage(
-                      'https://img.a.transfermarkt.technology/portrait/big/28003-1671435885.jpg?lm=1'),
+                  backgroundImage: NetworkImage(snap['porfImage'] == null
+                      ? snap['profImage']
+                      : snap['profImage']),
                 ),
                 Expanded(
                     child: Padding(
-                      padding: const EdgeInsets.only(left: 8),
-                      child: Row(
+                  padding: const EdgeInsets.only(left: 8),
+                  child: Row(
+                    children: [
+                      Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Column(
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children:  const [
-                              Text(
-                                'LeoMessi ',
-                                style: TextStyle(fontWeight: FontWeight.bold),
-                              ),
-
-                            ],
-                          ),
-                          SvgPicture.asset(
-                            'assets/icons8-instagram-verification-badge.svg',
-                            height: 16,
+                          Text(
+                            snap['username'],
+                            style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                         ],
                       ),
-
+                      SvgPicture.asset(
+                        'assets/icons8-instagram-verification-badge.svg',
+                        height: 16,
+                      ),
+                    ],
+                  ),
                 )),
                 IconButton(
                     onPressed: () {
@@ -79,11 +83,9 @@ class PostCard extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.35,
-            width: double.infinity,
             child: Image.network(
-              'https://people.com/thmb/60G4SLE0vvlrmo6TqpeNR5SNHks=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc():focal(999x438:1001x440)/lionel-messi-most-liked-instagram-picute-122222-2e46f8ce2f8444948fce28f2c84c72f2.jpg',
-              fit: BoxFit.cover,
+              snap['postUrl'],
+              fit: BoxFit.fill,
             ),
           ),
           Row(
@@ -99,16 +101,19 @@ class PostCard extends StatelessWidget {
                   onPressed: () {},
                   icon: const Icon(
                     Icons.mode_comment_outlined,
-                    size: 25,
+                    size: 27,
                   )),
               Transform.rotate(
                   angle: -45 * pi / 180,
-                  child: IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
-                        Icons.send,
-                        size: 25,
-                      ))),
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 5.0, left: 5),
+                    child: IconButton(
+                        onPressed: () {},
+                        icon: const Icon(
+                          Icons.send,
+                          size: 25,
+                        )),
+                  )),
               const Spacer(),
               IconButton(
                   onPressed: () {},
@@ -137,14 +142,17 @@ class PostCard extends StatelessWidget {
                   width: double.infinity,
                   padding: const EdgeInsets.only(top: 8),
                   child: RichText(
-                      text: const TextSpan(
+                      text: TextSpan(
                           style: TextStyle(color: primaryColor),
                           children: [
                         TextSpan(
-                            text: 'Leo Messi',
+                            text: snap['username'],
                             style: TextStyle(fontWeight: FontWeight.bold)),
                         TextSpan(
-                          text: '    The World Cup ♥☺',
+                          text: '  ',
+                        ),
+                        TextSpan(
+                          text: snap['description'],
                         ),
                       ])),
                 ),
@@ -160,8 +168,8 @@ class PostCard extends StatelessWidget {
                 ),
                 Container(
                   padding: const EdgeInsets.symmetric(vertical: 4),
-                  child: const Text(
-                    '18/12/2022',
+                  child: Text(
+                    DateFormat.yMMMd().format(snap['datePublished'].toDate()),
                     style: TextStyle(fontSize: 12, color: secondaryColor),
                   ),
                 ),

@@ -46,6 +46,7 @@ dependencies:
   image_picker:
   provider:
   uuid:
+  intl:
   conditional_builder_null_safety:
 
 dev_dependencies:
