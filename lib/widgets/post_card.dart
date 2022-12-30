@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:instagram/components/widgets.dart';
@@ -23,6 +24,28 @@ class PostCard extends StatefulWidget {
 
 class _PostCardState extends State<PostCard> {
   bool isLikeAnimating = false;
+
+  int commentLen = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchCommentLen();
+  }
+
+  fetchCommentLen() async {
+    try {
+      QuerySnapshot snap = await FirebaseFirestore.instance
+          .collection('posts')
+          .doc(widget.snap['postId'])
+          .collection('comments')
+          .get();
+      commentLen = snap.docs.length;
+    } catch (err) {
+      showSnackBar(err.toString(), context);
+    }
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -156,7 +179,11 @@ class _PostCardState extends State<PostCard> {
                           )),
               ),
               IconButton(
-                  onPressed: () =>navigateTo(context, CommentsScreen(postId: widget.snap['postId'].toString(),)),
+                  onPressed: () => navigateTo(
+                      context,
+                      CommentsScreen(
+                        postId: widget.snap['postId'].toString(),
+                      )),
                   icon: const Icon(
                     Icons.mode_comment_outlined,
                     size: 27,
@@ -218,8 +245,8 @@ class _PostCardState extends State<PostCard> {
                   onTap: () {},
                   child: Container(
                     padding: const EdgeInsets.symmetric(vertical: 4),
-                    child: const Text(
-                      'View all 2,021,200 comments',
+                    child:  Text(
+                      'View all ${commentLen} comments',
                       style: TextStyle(fontSize: 15, color: secondaryColor),
                     ),
                   ),
