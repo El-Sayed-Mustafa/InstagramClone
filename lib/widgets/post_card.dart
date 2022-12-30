@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:instagram/components/widgets.dart';
 import 'package:instagram/resources/firestore_methdes.dart';
 import 'package:instagram/utils/colors.dart';
 import 'package:instagram/widgets/like_animation.dart';
@@ -9,6 +10,7 @@ import 'package:intl/intl.dart';
 import 'package:instagram/providers/user_provider.dart';
 import 'package:provider/provider.dart';
 import '../models/user.dart';
+import '../screens/comments_screen.dart';
 
 class PostCard extends StatefulWidget {
   final snap;
@@ -154,7 +156,7 @@ class _PostCardState extends State<PostCard> {
                           )),
               ),
               IconButton(
-                  onPressed: () {},
+                  onPressed: () =>navigateTo(context, CommentsScreen(postId: widget.snap['postId'].toString(),)),
                   icon: const Icon(
                     Icons.mode_comment_outlined,
                     size: 27,
