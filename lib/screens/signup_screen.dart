@@ -10,6 +10,8 @@ import 'package:instagram/utils/colors.dart';
 import 'package:instagram/utils/utils.dart';
 import 'package:instagram/widgets/text_field_input.dart';
 
+import '../utils/gloabl_variabels.dart';
+
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
 
@@ -44,8 +46,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
             child: Form(
               key: _formKey,
               child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 32),
-                width: double.infinity,
+                padding: MediaQuery.of(context).size.width > webScreenSize
+                    ? EdgeInsets.symmetric(
+                    horizontal: MediaQuery.of(context).size.width / 3)
+                    : const EdgeInsets.symmetric(horizontal: 32),                  width: double.infinity,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [

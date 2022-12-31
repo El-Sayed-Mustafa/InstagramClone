@@ -5,6 +5,9 @@ import 'package:instagram/resources/auth_methods.dart';
 import 'package:instagram/screens/signup_screen.dart';
 import 'package:instagram/utils/colors.dart';
 
+import '../responsive/mobile_screen_layout.dart';
+import '../responsive/responsoive_layout_screen.dart';
+import '../responsive/web_screen_layout.dart';
 import '../utils/gloabl_variabels.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -31,11 +34,30 @@ class _LoginScreenState extends State<LoginScreen> {
     setState(() {
       isLoading = true;
     });
-    await AuthMethods().signInUser(
+    String res = await AuthMethods().signInUser(
         email: _emailController.text, password: _passwordController.text,context: context);
-    setState(() {
-      isLoading = false;
-    });
+    if (res == 'success') {
+      print('success');
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(
+            builder: (context) => const ResponsiveLayout(
+              mobileScreenLayout: MobileScreenLayout(),
+              webScreenLayout: WebScreenLayout(),
+            ),
+          ),
+              (route) => false);
+
+      setState(() {
+        isLoading = false;
+      });
+    } else {
+      print('fail');
+
+      setState(() {
+        isLoading = false;
+      });
+      showSnackBar(res, context);
+    }
   }
 
   @override
@@ -86,11 +108,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         prefix: Icons.lock_outline),
                     const SizedBox(height: 40.0),
                     InkWell(
-                      onTap: () {
-                        if (_formKey.currentState!.validate()) {
-                          loginUser();
-                        }
-                      },
+                      onTap:loginUser,
                       child: isLoading
                           ? const Center(
                               child: CircularProgressIndicator(),

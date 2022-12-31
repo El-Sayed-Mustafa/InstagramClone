@@ -6,7 +6,7 @@ import 'package:instagram/screens/profile_screen.dart';
 import '../screens/add_post_screen.dart';
 import '../screens/search_screen.dart';
 
-const webScreenSize = 600;
+const webScreenSize = 780;
 
  List<Widget> homeScreenItems = [
   const FeedScreen(),

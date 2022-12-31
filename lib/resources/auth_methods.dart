@@ -8,6 +8,10 @@ import 'package:instagram/resources/storage_methode.dart';
 import 'package:instagram/screens/home_screen.dart';
 import 'package:instagram/screens/login_screen.dart';
 
+import '../responsive/mobile_screen_layout.dart';
+import '../responsive/responsoive_layout_screen.dart';
+import '../responsive/web_screen_layout.dart';
+
 class AuthMethods {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -82,10 +86,11 @@ class AuthMethods {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
       res = "Success";
       showToast(msg: "Login Successfully", state: ToastState.SUCCESS);
-      navigateAndFinish(context, HomeScreen());
+      navigateTo(context, ResponsiveLayout(webScreenLayout: WebScreenLayout(), mobileScreenLayout: MobileScreenLayout()));
     } on FirebaseAuthException catch (e) {
       print(e.code);
       showToast(msg: Errors.show(e.code.toString()), state: ToastState.ERROR);
+
     } catch (err) {
       print("Error");
       showToast(

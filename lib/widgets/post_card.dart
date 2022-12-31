@@ -12,6 +12,7 @@ import 'package:instagram/providers/user_provider.dart';
 import 'package:provider/provider.dart';
 import '../models/user.dart';
 import '../screens/comments_screen.dart';
+import '../utils/gloabl_variabels.dart';
 
 class PostCard extends StatefulWidget {
   final snap;
@@ -50,10 +51,20 @@ class _PostCardState extends State<PostCard> {
   @override
   Widget build(BuildContext context) {
     final User? user = Provider.of<UserProvider>(context).getUser;
+    final width = MediaQuery.of(context).size.width;
 
     return Container(
-      color: mobileBackgroundColor,
-      padding: const EdgeInsets.symmetric(vertical: 10),
+      decoration: BoxDecoration(
+          borderRadius: const BorderRadius.all(Radius.circular(10)),
+        border: Border.all(
+          color: width > webScreenSize ? secondaryColor : mobileBackgroundColor,
+        ),
+        color: mobileBackgroundColor,
+      ),
+      padding: const EdgeInsets.symmetric(
+        vertical: 0,
+      ),
+
       child: Column(
         children: [
           Container(
@@ -209,6 +220,7 @@ class _PostCardState extends State<PostCard> {
                     Icons.bookmark_outline_outlined,
                     size: 32,
                   )),
+              SizedBox(width: 10,)
             ],
           ),
           Container(

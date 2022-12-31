@@ -4,13 +4,21 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:instagram/utils/colors.dart';
 import 'package:instagram/widgets/post_card.dart';
 
+import '../utils/gloabl_variabels.dart';
+
 class FeedScreen extends StatelessWidget {
   const FeedScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+
     return Scaffold(
-      appBar: AppBar(
+      backgroundColor:
+      width > webScreenSize ? webBackgroundColor : mobileBackgroundColor,
+      appBar: width > webScreenSize
+          ? null
+          : AppBar(
         backgroundColor: mobileBackgroundColor,
         title: SvgPicture.asset(
           'assets/ic_instagram.svg',
@@ -34,8 +42,14 @@ class FeedScreen extends StatelessWidget {
           return ListView.builder(
               shrinkWrap: true,
               itemCount: snapshot.data!.size,
-              itemBuilder: (context, index) => PostCard(
-                snap:snapshot.data!.docs[index].data(),
+              itemBuilder: (context, index) => Container(
+                margin: EdgeInsets.symmetric(
+                  horizontal: width > webScreenSize ? width * 0.3 : 0,
+                  vertical: width > webScreenSize ? 10 : 0,
+                ),
+                child: PostCard(
+                  snap:snapshot.data!.docs[index].data(),
+                ),
               ));
         },
       ),
