@@ -5,6 +5,8 @@ import 'package:instagram/resources/auth_methods.dart';
 import 'package:instagram/screens/signup_screen.dart';
 import 'package:instagram/utils/colors.dart';
 
+import '../utils/gloabl_variabels.dart';
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
@@ -45,9 +47,12 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Form(
               key: _formKey,
               child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 32),
-                width: double.infinity,
+                padding: MediaQuery.of(context).size.width > webScreenSize
+                    ? EdgeInsets.symmetric(
+                    horizontal: MediaQuery.of(context).size.width / 3)
+                    : const EdgeInsets.symmetric(horizontal: 32),                width: double.infinity,
                 child: Column(
+
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     SvgPicture.asset(

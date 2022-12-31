@@ -45,6 +45,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
       // get post lENGTH
       var postSnap = await FirebaseFirestore.instance
           .collection('posts')
+          .where('uid', isEqualTo: widget.uid)
+          .get();
+
+      var postSnapVisit = await FirebaseFirestore.instance
+          .collection('posts')
           .where('uid', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
           .get();
 
@@ -105,6 +110,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceEvenly,
                                   children: [
+                                    FirebaseAuth.instance.currentUser!.uid ==
+                                        widget.uid?
+                                    buildStatColumn(postLen, "posts"):
+
                                     buildStatColumn(postLen, "posts"),
                                     buildStatColumn(followers, "followers"),
                                     buildStatColumn(following, "following"),
@@ -123,9 +132,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                             textColor: primaryColor,
                                             borderColor: Colors.grey,
                                             function: () async {
-/*
                                               await AuthMethods().signOut();
-*/
+
                                               Navigator.of(context)
                                                   .pushReplacement(
                                                 MaterialPageRoute(
@@ -142,7 +150,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                 textColor: Colors.black,
                                                 borderColor: Colors.grey,
                                                 function: () async {
-                                                   await FirestoreMethods()
+                                                  await FirestoreMethods()
                                                       .followUser(
                                                     FirebaseAuth.instance
                                                         .currentUser!.uid,
@@ -161,7 +169,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                 textColor: Colors.white,
                                                 borderColor: Colors.blue,
                                                 function: () async {
-                                                    await FirestoreMethods()
+                                                  await FirestoreMethods()
                                                       .followUser(
                                                     FirebaseAuth.instance
                                                         .currentUser!.uid,
