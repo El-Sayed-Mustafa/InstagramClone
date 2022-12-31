@@ -142,13 +142,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                 textColor: Colors.black,
                                                 borderColor: Colors.grey,
                                                 function: () async {
-                                                 /* await FirestoreMethods()
+                                                   await FirestoreMethods()
                                                       .followUser(
                                                     FirebaseAuth.instance
                                                         .currentUser!.uid,
                                                     userData['uid'],
                                                   );
-*/
+
                                                   setState(() {
                                                     isFollowing = false;
                                                     followers--;
@@ -161,13 +161,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                 textColor: Colors.white,
                                                 borderColor: Colors.blue,
                                                 function: () async {
-                                                /*  await FireStoreMethods()
+                                                    await FirestoreMethods()
                                                       .followUser(
                                                     FirebaseAuth.instance
                                                         .currentUser!.uid,
                                                     userData['uid'],
                                                   );
-*/
+
                                                   setState(() {
                                                     isFollowing = true;
                                                     followers++;
