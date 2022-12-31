@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram/components/widgets.dart';
@@ -75,9 +77,8 @@ class _SearchScreenState extends State<SearchScreen> {
                         child: ListTile(
                           leading: CircleAvatar(
                             backgroundImage: NetworkImage(
-                              (snapshot.data! as dynamic).docs[index]
-                                  ['photoURL'],
-                            ),
+                                (snapshot.data as dynamic).docs[index]
+                                    ['photoURL']),
                             radius: 16,
                           ),
                           title: Text(

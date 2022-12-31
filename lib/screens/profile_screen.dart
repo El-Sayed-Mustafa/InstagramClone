@@ -76,26 +76,30 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ? const Center(
             child: CircularProgressIndicator(),
           )
-        : Scaffold(
-            appBar: AppBar(
-              backgroundColor: mobileBackgroundColor,
-              title: Container(
-                margin: EdgeInsets.symmetric(
-                  horizontal: width > 900 ? width * 0.3 : 0,
-                  vertical: width > webScreenSize ? 15 : 0,
-                ),
-                child: Text(
-                  userData['username'],
-                ),
+        : Container(
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: width > webScreenSize
+                    ? secondaryColor
+                    : mobileBackgroundColor,
               ),
-              centerTitle: false,
+              color: mobileBackgroundColor,
             ),
-            body: Container(
-              margin: EdgeInsets.symmetric(
-                horizontal: width > webScreenSize ? width * 0.3 : 0,
-                vertical: width > webScreenSize ? 15 : 0,
+            margin: EdgeInsets.symmetric(
+              horizontal: width > 900 ? width * 0.3 : 0,
+              vertical: width > webScreenSize ? 20 : 0,
+            ),
+            child: Scaffold(
+              appBar: AppBar(
+                backgroundColor: mobileBackgroundColor,
+                title: Container(
+                  child: Text(
+                    userData['username']??'',
+                  ),
+                ),
+                centerTitle: false,
               ),
-              child: ListView(
+              body: ListView(
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(16),
@@ -106,7 +110,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             CircleAvatar(
                               backgroundColor: Colors.grey,
                               backgroundImage: NetworkImage(
-                                userData['photoURL'],
+                                userData['photoURL']??'',
                               ),
                               radius: 40,
                             ),
@@ -203,7 +207,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             top: 15,
                           ),
                           child: Text(
-                            userData['username'],
+                            userData['username']??'',
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,
                             ),
@@ -215,7 +219,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             top: 1,
                           ),
                           child: Text(
-                            userData['bio'],
+                            userData['bio']??'',
                           ),
                         ),
                       ],
@@ -248,11 +252,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           DocumentSnapshot snap =
                               (snapshot.data! as dynamic).docs[index];
 
-                          return Container(
-                            child: Image(
-                              image: NetworkImage(snap['postUrl']),
-                              fit: BoxFit.cover,
-                            ),
+                          return Image(
+                            image: NetworkImage(snap['postUrl']),
+                            fit: BoxFit.cover,
                           );
                         },
                       );
