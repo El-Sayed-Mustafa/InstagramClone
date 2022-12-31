@@ -40,13 +40,13 @@ dependencies:
   firebase_core:
   firebase_auth:
   firebase_storage:
-  flutter_staggered_grid_view:
   flutter_svg:
   fluttertoast:
   image_picker:
   provider:
   uuid:
   intl:
+  flutter_staggered_grid_view: ^0.4.0
   conditional_builder_null_safety:
 
 dev_dependencies:
