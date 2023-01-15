@@ -1,23 +1,28 @@
-Instagram Clone
-A completely Responsive Instagram App- Works on Android, iOS & Web!
-
-Features
-Responsive Instagram UI
-Email & Password Authentication
-Share Posts with Caption
-Display Posts with Caption
-Like & Comment on Posts
-Search Users
-Follow Users
-Display User Posts, Followers & Following
-EVERYTHING REAL TIME
-Sign Out
-
-Tech Used
-Server: Firebase Auth, Firebase Storage, Firebase Firestore
-
-Client: Flutter, Provider
-
+<h1>Instagram Clone</h1>
+<p>This is a fully responsive Instagram clone app that works on Android, iOS, and Web. The app features a responsive Instagram UI, email and password authentication, the ability to share posts with captions, display posts with captions, like and comment on posts, search for users, follow users, display user posts, followers, and following, and the ability to sign out. Everything is real-time and updates automatically.</p>
+<h2>Getting Started</h2>
+<p>To get started with this project, you will need to have a basic understanding of Firebase Auth, Firebase Storage, Firebase Firestore, Flutter, and Provider, as well as experience with building mobile and web apps.</p>
+<h2>Prerequisites</h2>
+<ul>
+    <li>Flutter SDK</li>
+    <li>Dart</li>
+    <li>Firebase Auth</li>
+    <li>Firebase Storage</li>
+    <li>Firebase Firestore</li>
+    <li>Provider</li>
+</ul>
+<h2>Installing</h2>
+<ol>
+    <li>Clone the repository to your local machine using the following command:
+<pre>
+git clone https://github.com/<username>/InstagramClone.git
+</pre>
+    </li>
+    <li>Open the project in your preferred code editor</li>
+    <li>Run the application on an emulator or a physical device using a command terminal</li>
+</ol>
+<h2>Design</h2>
+<p>The application has a similar interface to the Instagram app, with a feed of posts, the ability to like and comment on posts, search for users, follow users, view user profiles, and the ability to share posts with captions. The app uses Firebase Auth for email and password authentication, Firebase Storage for storing and retrieving images, Firebase Firestore for storing and retrieving data, and Provider for managing the state of the app. The app is built using Flutter and works on Android, iOS, and the web.</p>
 
 Demo Link :
 https://clipchamp.com/watch/tmU3aNDRFn2
