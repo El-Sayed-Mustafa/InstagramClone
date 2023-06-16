@@ -1,4 +1,4 @@
-<h1>Instagram Clone</h1>
+![Screenshot_2023-06-17-01-28-08-442_com miui gallery](https://github.com/El-Sayed-Mustafa/InstagramClone/assets/110793510/6fd79a18-837f-4662-ae18-b2f1bc1ca612)<h1>Instagram Clone</h1>
 <p>This is a fully responsive Instagram clone app that works on Android, iOS, and Web. The app features a responsive Instagram UI, email and password authentication, the ability to share posts with captions, display posts with captions, like and comment on posts, search for users, follow users, display user posts, followers, and following, and the ability to sign out. Everything is real-time and updates automatically.</p>
 <h2>Getting Started</h2>
 <p>To get started with this project, you will need to have a basic understanding of Firebase Auth, Firebase Storage, Firebase Firestore, Flutter, and Provider, as well as experience with building mobile and web apps.</p>
@@ -41,7 +41,8 @@ Sign Up Screen :
 -
 ![image](https://user-images.githubusercontent.com/110793510/210153852-377fc22d-3d2d-44c2-8517-06ad7e26eeba.png)
 
--
+-![Screenshot_2023-06-17-01-27-37-916_com miui gallery](https://github.com/El-Sayed-Mustafa/InstagramClone/assets/110793510/7e11ce61-dbb1-49e4-9d12-78eb8ca97cb6)
+
 -
 -
 
@@ -78,5 +79,10 @@ Create Post Screen :
 
 ![image](https://user-images.githubusercontent.com/110793510/210153890-1c09077e-eb37-455b-8282-b76db061ee50.png)
 
-
+Web Screen :                  
+-
+![Screenshot_2023-06-17-01-27-52-554_com miui gallery](https://github.com/El-Sayed-Mustafa/InstagramClone/assets/110793510/34bfb974-4294-4b79-bea6-02ffd4101d67)
+![Screenshot_2023-06-17-01-28-20-723_com miui gallery](https://github.com/El-Sayed-Mustafa/InstagramClone/assets/110793510/e59c5691-9cd4-400e-9ec1-5f6724200c29)
+![Screenshot_2023-06-17-01-28-08-442_com miui gallery](https://github.com/El-Sayed-Mustafa/InstagramClone/assets/110793510/d7a14823-2dbe-48d2-be68-e00f134f86ca)
+![Screenshot_2023-06-17-01-27-37-916_com miui gallery](https://github.com/El-Sayed-Mustafa/InstagramClone/assets/110793510/85bb9f0f-10b9-4ac4-a174-f5ca7fb18c0c)
 
