@@ -41,8 +41,6 @@ Sign Up Screen :
 -
 ![image](https://user-images.githubusercontent.com/110793510/210153852-377fc22d-3d2d-44c2-8517-06ad7e26eeba.png)
 
--![Screenshot_2023-06-17-01-27-37-916_com miui gallery](https://github.com/El-Sayed-Mustafa/InstagramClone/assets/110793510/7e11ce61-dbb1-49e4-9d12-78eb8ca97cb6)
-
 -
 -
 
