@@ -1,4 +1,6 @@
-![Screenshot_2023-06-17-01-28-08-442_com miui gallery](https://github.com/El-Sayed-Mustafa/InstagramClone/assets/110793510/6fd79a18-837f-4662-ae18-b2f1bc1ca612)<h1>Instagram Clone</h1>
+
+![instgram clone (1)](https://github.com/El-Sayed-Mustafa/InstagramClone/assets/110793510/47d07148-e27a-4f1d-8156-fdaaff977570)
+
 <p>This is a fully responsive Instagram clone app that works on Android, iOS, and Web. The app features a responsive Instagram UI, email and password authentication, the ability to share posts with captions, display posts with captions, like and comment on posts, search for users, follow users, display user posts, followers, and following, and the ability to sign out. Everything is real-time and updates automatically.</p>
 <h2>Getting Started</h2>
 <p>To get started with this project, you will need to have a basic understanding of Firebase Auth, Firebase Storage, Firebase Firestore, Flutter, and Provider, as well as experience with building mobile and web apps.</p>
